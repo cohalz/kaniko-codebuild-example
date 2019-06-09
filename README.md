@@ -10,6 +10,6 @@ Example project using the [kaniko](https://github.com/GoogleContainerTools/kanik
 
 ## Notice
 
-The official kaniko image **doesn't work** on Codebuild.
+The official kaniko image **doesn't work** on CodeBuild.
 
 So, please use [cohalz/kaniko-alpine](https://hub.docker.com/r/cohalz/kaniko-alpine)
