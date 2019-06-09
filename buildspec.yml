@@ -3,5 +3,5 @@ version: 0.2
 phases:
   build:
     commands:
-      - echo "{\"credHelpers\":{\"$(echo $ECR_REPO | cut -d "/" -f 1)\":\"ecr-login\"}}" > /kaniko/.docker/config.json
-      - /kaniko/executor --force -d $ECR_REPO
+      - echo "{\"credsStore\":\"ecr-login\"}" > /kaniko/.docker/config.json
+      - /kaniko/executor --force -d "${ECR_REPO}"
