@@ -81,5 +81,5 @@ Resources:
         Location: https://github.com/cohalz/kaniko-codebuild-example
         Type: GITHUB
         GitCloneDepth: 1
-        BuildSpec: example/buildspec.yml
+        BuildSpec: buildspec.yml
       Name: kaniko-codebuild-example
