@@ -1,3 +1,10 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+  EcrRepository:
+    Type: String
+    Default: account.dkr.ecr.region.amazonaws.com/image:tag
+
 Resources:
   CodeBuildProjectRole:
     Type: AWS::IAM::Role
@@ -58,12 +65,13 @@ Resources:
         Type: NO_ARTIFACTS
       Environment:
         ComputeType: BUILD_GENERAL1_SMALL
-        Image: cohalz/kaniko-alpine
+        Image: 	aws/codebuild/standard:2.0
         Type: LINUX_CONTAINER
+        PrivilegedMode: true
         EnvironmentVariables:
           - Name: ECR_REPO
             Type: PLAINTEXT
-            Value: account.dkr.ecr.region.amazonaws.com/image:tag
+            Value: !Ref EcrRepository
       ServiceRole:
         Fn::GetAtt:
           - CodeBuildProjectRole
@@ -73,4 +81,5 @@ Resources:
         Location: https://github.com/cohalz/kaniko-codebuild-example
         Type: GITHUB
         GitCloneDepth: 1
+        BuildSpec: example/buildspec.yml
       Name: kaniko-codebuild-example
