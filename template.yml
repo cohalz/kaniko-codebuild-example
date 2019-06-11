@@ -4,6 +4,9 @@ Parameters:
   EcrRepository:
     Type: String
     Default: account.dkr.ecr.region.amazonaws.com/image:tag
+  BaseImages:
+    Type: String
+    Default: debian:stretch-slim,alpine:latest
 
 Resources:
   CodeBuildProjectRole:
@@ -72,6 +75,9 @@ Resources:
           - Name: ECR_REPO
             Type: PLAINTEXT
             Value: !Ref EcrRepository
+          - Name: BASE_IMAGES
+            Type: PLAINTEXT
+            Value: !Ref BaseImages
       ServiceRole:
         Fn::GetAtt:
           - CodeBuildProjectRole

@@ -8,8 +8,10 @@ Example project using the [kaniko](https://github.com/GoogleContainerTools/kanik
 2. Deploy `template.yml` via CloudFormation
 3. `Start Build` on `kaniko-codebuild-example` project
 
-## Notice
+## Other example
 
-The official kaniko image **doesn't work** on CodeBuild.
+An example of using kaniko as a base image is available under `example/using-kaniko-image`.
 
+### Notice
+The official kaniko image as a runtime image **doesn't work** on CodeBuild.
 So, please use [cohalz/kaniko-alpine](https://hub.docker.com/r/cohalz/kaniko-alpine)
