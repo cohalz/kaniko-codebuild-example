@@ -4,9 +4,8 @@ Example project using the [kaniko](https://github.com/GoogleContainerTools/kanik
 
 ## Usage
 
-1. Modify `ECR_REPO` section in `template.yml` to your ECR repository
-2. Deploy `template.yml` via CloudFormation
-3. `Start Build` on `kaniko-codebuild-example` project
+1. Deploy `template.yml` via CloudFormation
+2. `Start Build` on the CodeBuild project
 
 ## Other example
 
