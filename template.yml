@@ -67,6 +67,7 @@ Resources:
       Artifacts:
         Type: NO_ARTIFACTS
       Cache:
+        Type: LOCAL
         Modes:
           - LOCAL_CUSTOM_CACHE
           - LOCAL_DOCKER_LAYER_CACHE
