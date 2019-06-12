@@ -11,6 +11,7 @@ phases:
       - export AWS_SECRET_ACCESS_KEY=$(echo "${metadata}" | jq -r .SecretAccessKey)
       - export AWS_SESSION_TOKEN=$(echo "${metadata}" | jq -r .Token)
       - images=$(echo ${BASE_IMAGES} | perl -anal -e 'print join(" ", map {"--image=" . $_ } split ",")')
+      - mkdir .docker && echo "{\"credsStore\":\"ecr-login\"}" > .docker/config.json
       - |
         docker run \
           -v /cache:/cache \
@@ -20,7 +21,7 @@ phases:
       - | 
         docker run \
           -v $(pwd):/workspace \
-          -v $(pwd)/docker:/kaniko/.docker \
+          -v $(pwd)/.docker:/kaniko/.docker \
           -v /cache:/cache \
           -e AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} \
           -e AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} \
