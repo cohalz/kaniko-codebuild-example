@@ -29,7 +29,7 @@ phases:
           --cache=true \
           --cache-dir=/cache \
           --cache-repo ${ECR_REPO} \
-          -d ${ECR_REPO}
+          -d ${ECR_REPO}:${ECR_TAG}
 cache:
   paths:
     - /cache/**/*
