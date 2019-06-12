@@ -1,7 +1,5 @@
-FROM python:alpine
+FROM golang:1.10 as builder
+RUN echo "builder success!"
 
-RUN echo "success!"
-
-ENTRYPOINT ["python"]
-
-CMD ["--help"]
+FROM alpine:latest
+RUN echo "runner success!"

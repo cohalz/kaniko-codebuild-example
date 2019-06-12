@@ -3,10 +3,19 @@ AWSTemplateFormatVersion: 2010-09-09
 Parameters:
   EcrRepository:
     Type: String
-    Default: account.dkr.ecr.region.amazonaws.com/image:tag
+    Default: account.dkr.ecr.region.amazonaws.com/image
+  Tag:
+    Type: String
+    Default: latest
   BaseImages:
     Type: String
-    Default: debian:stretch-slim,alpine:latest
+    Default: golang:1.10,alpine:latest
+  GitHubRepository:
+    Type: String
+    Default: https://github.com/cohalz/kaniko-codebuild-example
+  ProjectName:
+    Type: String
+    Default: kaniko-codebuild-example
 
 Resources:
   CodeBuildProjectRole:
@@ -58,7 +67,7 @@ Resources:
                     - Ref: CodeBuildProject
                     - :*
         Version: "2012-10-17"
-      PolicyName: kaniko-codebuild-example-policy
+      PolicyName: !Sub ${ProjectName}-policy
       Roles:
         - Ref: CodeBuildProjectRole
   CodeBuildProject:
@@ -78,20 +87,23 @@ Resources:
         Type: LINUX_CONTAINER
         PrivilegedMode: true
         EnvironmentVariables:
-          - Name: ECR_REPO
-            Type: PLAINTEXT
-            Value: !Ref EcrRepository
           - Name: BASE_IMAGES
             Type: PLAINTEXT
             Value: !Ref BaseImages
-      Name: kaniko-codebuild-example
+          - Name: ECR_REPO
+            Type: PLAINTEXT
+            Value: !Ref EcrRepository
+          - Name: ECR_TAG
+            Type: PLAINTEXT
+            Value: !Ref Tag
+      Name: !Ref ProjectName
       ServiceRole:
         Fn::GetAtt:
           - CodeBuildProjectRole
           - Arn
       Source:
         InsecureSsl: true
-        Location: https://github.com/cohalz/kaniko-codebuild-example
+        Location: !Ref GitHubRepository
         Type: GITHUB
         GitCloneDepth: 1
         BuildSpec: buildspec.yml
