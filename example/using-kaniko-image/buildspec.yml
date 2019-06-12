@@ -4,4 +4,4 @@ phases:
   build:
     commands:
       - echo "{\"credsStore\":\"ecr-login\"}" > /kaniko/.docker/config.json
-      - /kaniko/executor --force -d "${ECR_REPO}"
+      - /kaniko/executor --force -d ${ECR_REPO} --cache-repo ${ECR_REPO}

@@ -66,6 +66,11 @@ Resources:
     Properties:
       Artifacts:
         Type: NO_ARTIFACTS
+      Cache:
+        Modes:
+          - LOCAL_CUSTOM_CACHE
+          - LOCAL_DOCKER_LAYER_CACHE
+          - LOCAL_SOURCE_CACHE
       Environment:
         ComputeType: BUILD_GENERAL1_SMALL
         Image: aws/codebuild/standard:2.0
@@ -78,6 +83,7 @@ Resources:
           - Name: BASE_IMAGES
             Type: PLAINTEXT
             Value: !Ref BaseImages
+      Name: kaniko-codebuild-example
       ServiceRole:
         Fn::GetAtt:
           - CodeBuildProjectRole
@@ -88,4 +94,3 @@ Resources:
         Type: GITHUB
         GitCloneDepth: 1
         BuildSpec: buildspec.yml
-      Name: kaniko-codebuild-example

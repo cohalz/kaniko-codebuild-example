@@ -28,6 +28,7 @@ phases:
           gcr.io/kaniko-project/executor \
           --cache=true \
           --cache-dir=/cache \
+          --cache-repo ${ECR_REPO}
           -d ${ECR_REPO}
 cache:
   paths:
