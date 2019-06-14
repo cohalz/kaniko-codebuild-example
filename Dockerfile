@@ -1,6 +1,8 @@
+# syntax = docker/dockerfile:experimental
+
 FROM alpine as step1
 RUN apk add --no-cache ca-certificates
-RUN sleep 60 && touch /tmp/step1
+RUN sleep 59 && touch /tmp/step1
 FROM alpine as step2
 RUN apk add --no-cache ca-certificates
 RUN sleep 60 && touch /tmp/step2
