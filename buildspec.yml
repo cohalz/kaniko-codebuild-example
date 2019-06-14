@@ -17,7 +17,7 @@ phases:
           -v /cache:/cache \
           gcr.io/kaniko-project/warmer \
           --cache-dir=/cache \
-          ${images}
+          "${images}"
       - | 
         docker run \
           -v $(pwd):/workspace \
